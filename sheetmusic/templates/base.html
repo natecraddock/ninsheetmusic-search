@@ -1,0 +1,30 @@
+<!doctype html>
+<head>
+    <title>NinSheetMusic Search</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div id="header">
+        <h1><a href="{{ url_for("routes.index") }}">NinSheetMusic</a></h1>
+        <div>
+            <form method="post" action="/search">
+                <input id="query" name="query" type="text" placeholder="Search all songs" required>
+            </form>
+        </div>
+    </div>
+    <main>
+        <div id="sidebar">
+            <div id="sticky">
+                <ul>
+                    {% for title in g.series %}
+                        <li><a href="{{ url_for('routes.series', name=title) }}">{{ title }}</a></li>
+                    {% endfor %}
+                </ul>
+                <p title="Updated {{ g.last_update }}">{{ g.num_sheets }} sheets</p>
+            </div>
+        </div>
+        <div id="main">
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+</body>

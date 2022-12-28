@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>{{ name }}</h2>
+
+<ul>
+{% for game in games %}
+    <h3>{{ game }} [{{ sheets[game][0]["platform"] }}]</h3>
+    {% for sheet in sheets[game] %}
+        <li><a href="{{ sheet['url'] }}">{{ sheet["title"] }}</a></li>
+    {% endfor %}
+{% endfor %}
+</ul>
+
+{% endblock %}
