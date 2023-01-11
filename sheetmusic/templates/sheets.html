@@ -1,6 +1,19 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
+<style>
+    @media screen and (max-width: 800px) {
+        #sidebar {
+            display: none;
+        }
+
+        #content {
+            display: unset;
+        }
+    }
+</style>
+
 <h2>{{ name }}</h2>
 
 <ul>
