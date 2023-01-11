@@ -49,7 +49,7 @@ def series(name):
 def search():
     query = request.form["query"]
     db = get_db()
-    sheets = db.execute("SELECT * FROM music WHERE title LIKE ?", (f"%{query}%",))
+    sheets = db.execute("SELECT * FROM music WHERE title LIKE ? OR game LIKE ?", (f"%{query}%", f"%{query}%"))
 
     mapping = {}
     for sheet in sheets:
