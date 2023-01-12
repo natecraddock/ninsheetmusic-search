@@ -88,6 +88,8 @@ input[type="text"] {
 
 @media screen and (max-width: 800px) {
     body {
+        height: unset;
+        overflow: unset;
         column-gap: 0;
         grid-template-columns: 1fr;
     }
@@ -116,5 +118,6 @@ input[type="text"] {
 
     #content {
         display: none;
+        overflow-y: unset;
     }
 }
