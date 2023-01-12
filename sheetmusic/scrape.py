@@ -84,11 +84,7 @@ def scrape_sheet_data(series_name: str, game_title: str, platform: str, sheet) -
     Combine all data for a sheet into a single dict
     """
     title = sheet.select_one(".tableList-cell--sheetTitle").text.strip()
-    arranger = sheet.select_one(".tableList-cell--sheetArranger").text.strip()
     pdf = sheet.select_one(".tableList-buttonCell--sheetPdf").attrs["href"].strip()
-
-    arranger = arranger.replace("\n", ",")
-
     pdf = f"{BASE_URL}{pdf}"
 
     # Keep order the same as the sqlite schema
@@ -97,7 +93,6 @@ def scrape_sheet_data(series_name: str, game_title: str, platform: str, sheet) -
         game_title,
         series_name,
         platform,
-        arranger,
         pdf,
     )
 

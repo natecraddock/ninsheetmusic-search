@@ -47,7 +47,7 @@ def populate_db():
     db.commit()
 
     db.executemany(
-        "INSERT INTO music (title, game, series, platform, arranger, url) VALUES (?, ?, ?, ?, ?, ?)",
+        "INSERT INTO music (title, game, series, platform, url) VALUES (?, ?, ?, ?, ?)",
         data["sheets"],
     )
 
