@@ -1,7 +1,10 @@
+import atexit
 import os
 
+from apscheduler.schedulers.background import BackgroundScheduler
 from flask import Flask
 
+from sheetmusic.db import populate_db
 
 def create_app():
     # create and configure the app
@@ -25,5 +28,15 @@ def create_app():
 
     from . import routes
     app.register_blueprint(routes.routes)
+
+    def automation():
+        with app.app_context():
+            populate_db()
+
+    scheduler = BackgroundScheduler()
+    scheduler.add_job(func=automation, trigger='cron', hour=0, minute=0)
+    scheduler.start()
+
+    atexit.register(lambda: scheduler.shutdown())
 
     return app
