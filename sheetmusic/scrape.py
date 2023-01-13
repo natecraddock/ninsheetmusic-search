@@ -3,10 +3,10 @@ scrape sheet music data from www.ninsheetmusic.org
 """
 
 import datetime
+import logging
 import os
 import requests
 from bs4 import BeautifulSoup
-from flask import current_app
 
 # the series page is the easiest to scrape
 BASE_URL = "https://www.ninsheetmusic.org"
@@ -20,17 +20,16 @@ def scrape():
     Scrape all data and output as json to stdout
     """
 
-    current_app.logger.info(f"scraping started at {timestamp()}")
+    logging.info(f"started scraping ninsheetmusic.org")
 
     sheets = scrape_all_series()
     if not sheets:
-        current_app.logger.warn(f"unable to scrape ninsheetmusic.org for data")
+        logging.warn(f"unable to scrape ninsheetmusic.org for data")
         return
 
-    end_time = timestamp()
-    data = { "sheets": sheets, "timestamp": end_time }
+    data = { "sheets": sheets, "timestamp": timestamp() }
 
-    current_app.logger.info(f"scraping finished at {end_time}")
+    logging.info(f"finished scraping")
 
     return data
 

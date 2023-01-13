@@ -1,4 +1,4 @@
-import datetime
+import logging
 import sqlite3
 
 import click
@@ -41,11 +41,13 @@ def populate_db():
     if not data:
         return
 
+    logging.info("clearing database")
     db.execute("DELETE FROM metadata")
     db.execute("DELETE FROM music")
 
     db.commit()
 
+    logging.info("inserting data into database")
     db.executemany(
         "INSERT INTO music (title, game, series, platform, url) VALUES (?, ?, ?, ?, ?)",
         data["sheets"],

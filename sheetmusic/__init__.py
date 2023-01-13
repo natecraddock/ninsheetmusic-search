@@ -1,4 +1,5 @@
 import atexit
+import logging
 import os
 
 from apscheduler.schedulers.background import BackgroundScheduler
@@ -7,6 +8,8 @@ from flask import Flask
 from sheetmusic.db import populate_db
 
 def create_app():
+    logging.basicConfig(level=logging.INFO, format="[%(asctime)s] %(levelname)s: %(message)s")
+
     # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_mapping(

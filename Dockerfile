@@ -2,8 +2,11 @@ FROM alpine:3.17
 
 EXPOSE 8080
 
-RUN apk add python3
+RUN apk add --no-cache python3 tzdata
 RUN python3 -m ensurepip
+
+ENV TZ=America/Denver
+RUN cp /usr/share/zoneinfo/America/Denver /etc/localtime
 
 RUN mkdir app/
 

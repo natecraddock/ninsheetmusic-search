@@ -1,3 +1,5 @@
+import logging
+
 from flask import Blueprint, g, render_template, request
 
 from sheetmusic.db import get_db
