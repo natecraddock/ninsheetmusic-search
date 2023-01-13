@@ -14,12 +14,16 @@
         </div>
     </div>
     <div id="sidebar">
+        {% if g.num_sheets == 0 %}
+            <p>No sheet music data. Run <code>python3 -m flask --app sheetmusic init-db</code> to pull the latest data from <a href="ninsheetmusic.org">ninsheetmusic.org</a></p>
+        {% else %}
         <ul>
             {% for title in g.series %}
-                <li><a href="{{ url_for('routes.series', name=title) }}">{{ title }}</a></li>
+            <li><a href="{{ url_for('routes.series', name=title) }}">{{ title }}</a></li>
             {% endfor %}
         </ul>
         <p title="Updated {{ g.last_update }}">{{ g.num_sheets }} sheets</p>
+        {% endif %}
     </div>
     <div id="content">
         {% block content %}{% endblock %}

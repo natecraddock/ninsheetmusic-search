@@ -14,7 +14,9 @@
     }
 </style>
 
+{% if g.num_sheets != 0 %}
 <h2>{{ name }}</h2>
+{% endif %}
 
 <ul>
 {% for game in games %}

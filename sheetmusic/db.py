@@ -61,10 +61,7 @@ def populate_db():
 def init_db_command():
     """Clear the existing data, create new tables, and populate with data"""
     init_db()
-    click.echo("Created the database")
-    click.echo("Scraping data and populating the database...")
     populate_db()
-    click.echo("Finished initializing database")
 
 def init_app(app):
     app.teardown_appcontext(close_db)
