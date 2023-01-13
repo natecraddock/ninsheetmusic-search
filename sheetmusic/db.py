@@ -28,12 +28,6 @@ def init_db():
     with current_app.open_resource("schema.sql") as f:
         db.executescript(f.read().decode("utf8"))
 
-@click.command("init-db")
-def init_db_command():
-    """Clear the existing data, create new tables, and populate with data"""
-    init_db()
-    click.echo("Initialized the database")
-
 def populate_db():
     db = get_db()
 
@@ -59,25 +53,19 @@ def populate_db():
     )
 
     db.commit()
+    logging.info("database updated")
 
     return True
 
-@click.command("populate-db")
-def populate_db_command():
+@click.command("init-db")
+def init_db_command():
+    """Clear the existing data, create new tables, and populate with data"""
+    init_db()
+    click.echo("Created the database")
     click.echo("Scraping data and populating the database...")
-
-    db = get_db()
-    row = db.execute("SELECT last_update FROM metadata").fetchone()
-    if row:
-        last_update = row["last_update"]
-        print(last_update)
-        if last_update.date() >= datetime.datetime.now().date():
-            click.echo("Data is up-to-date")
-            return
-
     populate_db()
+    click.echo("Finished initializing database")
 
 def init_app(app):
     app.teardown_appcontext(close_db)
     app.cli.add_command(init_db_command)
-    app.cli.add_command(populate_db_command)
