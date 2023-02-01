@@ -64,7 +64,8 @@ def search():
     db = get_db()
 
     try:
-        sheets = db.execute("SELECT * FROM music WHERE title LIKE ? OR game LIKE ?", (f"%{query}%", f"%{query}%"))
+        sheets = db.execute("SELECT * FROM music WHERE title LIKE ? OR title_plain LIKE ? OR game LIKE ? OR game_plain LIKE ?",
+                            (f"%{query}%", f"%{query}%", f"%{query}%", f"%{query}%"))
     except sqlite3.OperationalError as e:
         logging.error(e)
         sheets = []

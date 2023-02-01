@@ -9,7 +9,9 @@ CREATE TABLE metadata (
 CREATE TABLE music (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     title TEXT NOT NULL,
+    title_plain TEXT NOT NULL,
     game TEXT NOT NULL,
+    game_plain TEXT NOT NULL,
     series TEXT NOT NULL,
     platform TEXT NOT NULL,
     url TEXT NOT NULL

@@ -10,6 +10,7 @@ setup(
         "flask",
         "beautifulsoup4",
         "requests",
+        "unidecode",
         "waitress",
     ],
 )

@@ -6,6 +6,7 @@ import datetime
 import logging
 import os
 import requests
+import unidecode
 from bs4 import BeautifulSoup
 
 # the series page is the easiest to scrape
@@ -89,7 +90,9 @@ def scrape_sheet_data(series_name: str, game_title: str, platform: str, sheet) -
     # Keep order the same as the sqlite schema
     return (
         title,
+        unidecode.unidecode(title),
         game_title,
+        unidecode.unidecode(game_title),
         series_name,
         platform,
         pdf,

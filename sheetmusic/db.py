@@ -43,7 +43,7 @@ def populate_db():
 
     logging.info("inserting data into database")
     db.executemany(
-        "INSERT INTO music (title, game, series, platform, url) VALUES (?, ?, ?, ?, ?)",
+        "INSERT INTO music (title, title_plain, game, game_plain, series, platform, url) VALUES (?, ?, ?, ?, ?, ?, ?)",
         data["sheets"],
     )
 
